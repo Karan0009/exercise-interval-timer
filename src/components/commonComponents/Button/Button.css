@@ -178,3 +178,11 @@
   background: palevioletred;
   color: #ccfff6;
 }
+
+.common_styles:disabled {
+  opacity: 0.7;
+}
+
+.common_styles:disabled::after {
+  opacity: 0;
+}

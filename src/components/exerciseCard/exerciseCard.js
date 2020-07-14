@@ -3,6 +3,7 @@ import styled from "styled-components";
 import "./exerciseCard.css";
 
 import Button from "../commonComponents/Button/Button";
+import Timer from "../timer/timer";
 
 const Card = styled.div`
   position: relative;
@@ -34,6 +35,7 @@ const ExerciseCard = (props) => {
         </Button>
         <div className="excerciseCard_info">
           <div className="circle">
+            {/* <Timer totalTime={props.exerciseData.exerciseDuration} /> */}
             <p className="exerciseCard_time">
               {props.exerciseData.exerciseDuration}s
             </p>

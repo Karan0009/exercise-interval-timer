@@ -31,7 +31,7 @@
   font-size: 30px;
   font-family: "MuseoModerno", cursive;
   font-weight: 900;
-  z-index: 22220;
+  z-index: 0;
   position: relative;
   justify-self: start;
 }

@@ -1,30 +1,199 @@
-import React, { useState, useEffect } from "react";
+import React, { Component } from "react";
 import "./timer.css";
 
 import Button from "../commonComponents/Button/Button";
 
-const Timer = (props) => {
-  const [totalTime, setTotalTime] = useState();
+let timerId = -1;
+let exerciseIndex = 0;
+let currentExerciseTime = 0;
+class Timer extends Component {
+  state = {
+    totalTime: 20,
+    hasStarted: false,
+    timeCompleted: false,
+    elapsedTime: 0,
+    remainingTime: 0,
+  };
 
-  useEffect(() => {
-    let time = 0;
-    setTotalTime(0);
-    for (let i of props.exercises) {
-      time += Number(i.exerciseDuration);
+  componentDidMount() {
+    this.getTotalTime();
+    if (this.props.auto) {
+      this.startAutoTimer();
     }
-    setTotalTime(time);
-    console.log(totalTime);
-  });
+  }
 
-  return (
-    <div className="timer_container">
-      {props.showTotal && <h3>Total:</h3>}
-      <p className="timer">
-        {isNaN(totalTime) ? "00" : Math.trunc(totalTime / 60)}:
-        {isNaN(totalTime) ? "00" : totalTime % 60}
-      </p>
-    </div>
-  );
-};
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.isRestScreenOn !== this.props.isRestScreenOn) {
+      this.startTimer();
+    }
+  }
+
+  startAutoTimer = () => {
+    this.setState({ hasStarted: true });
+    let interval = setInterval(() => {
+      if (this.state.totalTime <= 0) {
+        this.setState({ hasStarted: false, timeCompleted: true });
+        clearInterval(interval);
+        if (this.props.removeScreen) {
+          this.props.setShowRestScreen(false);
+        }
+      } else {
+        let temp = this.state.totalTime;
+        temp -= 1;
+        this.setState({ totalTime: temp });
+      }
+    }, 1000);
+  };
+
+  startTimer = () => {
+    console.log("should start timer");
+    timerId = setInterval(() => {
+      this.syncExercisesWithTimer();
+      if (this.state.totalTime <= 0) {
+        console.log("done");
+        this.setState({ hasStarted: false, timeCompleted: true });
+        clearInterval(timerId);
+      } else {
+        let temp = this.state.totalTime;
+        let elapTime = this.state.elapsedTime;
+        elapTime += 1;
+        temp -= 1;
+        // console.log(temp);
+        this.setState({
+          remainingTime: this.state.totalTime - this.state.elapsedTime,
+          totalTime: temp,
+          elapsedTime: elapTime,
+        });
+      }
+    }, 1000);
+    this.setState({ hasStarted: true });
+  };
+
+  startStopTimer = () => {
+    this.setState({ hasStarted: !this.state.hasStarted });
+    if (timerId === -1) {
+      this.startTimer();
+    } else {
+      this.stopTimer();
+    }
+  };
+
+  stopTimer = () => {
+    this.setState({ hasStarted: false });
+    console.log("should stop timer");
+    clearInterval(timerId);
+    timerId = -1;
+  };
+
+  syncExercisesWithTimer = () => {
+    currentExerciseTime += 1;
+    console.log(currentExerciseTime);
+    if (
+      currentExerciseTime ===
+      this.props.exercises[exerciseIndex].exerciseDuration
+    ) {
+      console.log("should show rest screen");
+      currentExerciseTime = 0;
+      exerciseIndex += exerciseIndex;
+      if (exerciseIndex > this.props.exercises.length) {
+        console.log("all exercises done");
+        this.stopTimer();
+        return;
+      }
+      this.stopTimer();
+      console.log("timer stopped");
+      this.props.setShowRestScreen(true);
+    }
+  };
+
+  restartTimer = () => {
+    this.getTotalTime();
+    this.setState({
+      hasStarted: false,
+      timeCompleted: false,
+      elapsedTime: 0,
+      remainingTime: this.state.totalTime,
+    });
+    clearInterval(timerId);
+    timerId = -1;
+  };
+
+  getTotalTime = () => {
+    if (this.props.exercises) {
+      let time = 0;
+      for (let i of this.props.exercises) {
+        time += Number(i.exerciseDuration);
+      }
+      this.setState({ totalTime: time });
+    } else if (this.props.totalTime) {
+      this.setState({ totalTime: this.props.totalTime });
+    }
+  };
+
+  render() {
+    return (
+      <div className="timer_container">
+        {this.props.showTotal && <h3>Total:</h3>}
+        <p className="timer">
+          {isNaN(this.state.totalTime)
+            ? "00"
+            : Math.trunc(this.state.totalTime / 60)}
+          :{isNaN(this.state.totalTime) ? "00" : this.state.totalTime % 60}
+        </p>
+        {this.props.showElapsedTime && (
+          <div>
+            <h3>Elapsed Time:</h3>
+            <p className="elapsed_time">
+              {isNaN(this.state.elapsedTime)
+                ? "00"
+                : Math.trunc(this.state.elapsedTime / 60)}
+              :
+              {isNaN(this.state.elapsedTime)
+                ? "00"
+                : this.state.elapsedTime % 60}
+            </p>
+          </div>
+        )}
+        {/* {this.props.showRemainingTime && (
+          <div>
+            <h3>Remaining Time:</h3>
+            <p className="elapsed_time">
+              {isNaN(this.state.elapsedTime) && isNaN(this.state.totalTime)
+                ? "00"
+                : Math.trunc(this.state.remainingTime / 60)}
+              :
+              {isNaN(this.state.elapsedTime) && isNaN(this.state.totalTime)
+                ? "00"
+                : this.state.remainingTime % 60}
+            </p>
+          </div>
+        )} */}
+        {this.props.showButtons && (
+          <div className="interact_buttons">
+            <Button
+              commonStyles
+              buttonAnimation
+              type="button"
+              classes="btn_interact"
+              onClick={this.startStopTimer}
+              disabled={this.state.timeCompleted ? "disabled" : ""}
+            >
+              {this.state.hasStarted ? "Stop" : "Start"}
+            </Button>
+            <Button
+              commonStyles
+              buttonAnimation
+              type="button"
+              classes="btn_interact"
+              onClick={this.restartTimer}
+            >
+              Restart
+            </Button>
+          </div>
+        )}
+      </div>
+    );
+  }
+}
 
 export default Timer;

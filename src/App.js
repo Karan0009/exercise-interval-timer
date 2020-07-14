@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { withRouter, Switch, Route } from "react-router-dom";
 import styled from "styled-components";
+
 import "./App.css";
 
 import Input from "./components/commonComponents/input/input";
@@ -10,30 +11,27 @@ import Footer from "./components/commonComponents/footer/footer";
 import WorkoutAddForm from "./components/workoutAddForm/workoutAddForm";
 import HomePage from "./pages/home/home";
 import SettingsPage from "./pages/settings/settings";
+import Backdrop from "./components/commonComponents/backdrop/backdrop";
 
 class App extends Component {
   state = {
     appName: "Let's workout",
-    defaultRestTime: 30,
+    defaultRestTime: 3,
+    showBackdrop: false,
     exercises: [
       {
         exerciseName: "one",
-        exerciseDuration: 30,
+        exerciseDuration: 5,
         restDuration: 10,
       },
       {
         exerciseName: "two",
-        exerciseDuration: 30,
+        exerciseDuration: 5,
         restDuration: 10,
       },
       {
         exerciseName: "three",
-        exerciseDuration: 60,
-        restDuration: 10,
-      },
-      {
-        exerciseName: "four",
-        exerciseDuration: 30,
+        exerciseDuration: 5,
         restDuration: 10,
       },
     ],
@@ -63,6 +61,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        {this.state.showBackdrop && <Backdrop />}
         <Nav
           {...this.props}
           appName={this.state.appName}
@@ -81,6 +80,7 @@ class App extends Component {
                 removeExercise={this.removeExercise}
                 addExerciseHandler={this.addExerciseHandler}
                 showExerciseAddForm={this.state.showExerciseAddForm}
+                defaultRestTime={this.state.defaultRestTime}
               />
             )}
           />

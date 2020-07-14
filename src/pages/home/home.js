@@ -5,12 +5,18 @@ import Input from "../../components/commonComponents/input/input";
 import Button from "../../components/commonComponents/Button/Button";
 import Workouts from "../../components/workouts/workouts";
 import Timer from "../../components/timer/timer";
+import Countdown from "../../components/countdown/countdown";
+import RestScreen from "../../components/restScreen/restScreen";
 
 class HomePage extends Component {
   state = {
     exerciseName: "",
     exerciseDuration: 30,
+    showRestScreen: true,
+    startTimerAfterRest: false,
   };
+
+  exerciseOrRestHandler = () => {};
 
   inputChangeHandler = (e) => {
     if (e.target.id === "exerciseDuration") {
@@ -19,9 +25,21 @@ class HomePage extends Component {
     this.setState({ [e.target.id]: e.target.value });
   };
 
+  setShowRestScreen = (value) => {
+    if (value) this.setState({ showRestScreen: value });
+    else this.setState({ showRestScreen: value, startTimerAfterRest: true });
+  };
+
   render() {
     return (
       <>
+        {this.state.showRestScreen && (
+          <RestScreen
+            setShowRestScreen={this.setShowRestScreen}
+            defaultRestTime={this.props.defaultRestTime}
+          />
+        )}
+
         <div className="main_wrapper">
           <div className="ad_wrapper">ad here</div>
           <div className="main">
@@ -67,25 +85,15 @@ class HomePage extends Component {
                 </Button>
               </div>
             )}
-            <Timer exercises={this.props.exercises} showTotal />
-            <div className="interact_buttons">
-              <Button
-                commonStyles
-                buttonAnimation
-                type="button"
-                classes="btn_interact"
-              >
-                Start
-              </Button>
-              <Button
-                commonStyles
-                buttonAnimation
-                type="button"
-                classes="btn_interact"
-              >
-                Restart
-              </Button>
-            </div>
+            {/* <Countdown /> */}
+            <Timer
+              exercises={this.props.exercises}
+              showTotal
+              showButtons
+              showElapsedTime
+              setShowRestScreen={this.setShowRestScreen}
+            />
+
             <Workouts
               className="workouts_home"
               exercises={this.props.exercises}
