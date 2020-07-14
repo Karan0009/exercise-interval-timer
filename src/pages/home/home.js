@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import "./home.css";
 
-import Input from "../../components/commonComponents/input/input";
+// import Input from "../../components/commonComponents/input/input";
 import Button from "../../components/commonComponents/Button/Button";
 import Workouts from "../../components/workouts/workouts";
 import Timer from "../../components/timer/timer";
-import Countdown from "../../components/countdown/countdown";
+// import Countdown from "../../components/countdown/countdown";
 import RestScreen from "../../components/restScreen/restScreen";
 
 class HomePage extends Component {

@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import "./exerciseCard.css";
 
 import Button from "../commonComponents/Button/Button";
-import Timer from "../timer/timer";
+// import Timer from "../timer/timer";
 
 const Card = styled.div`
   position: relative;

@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import { withRouter, Switch, Route } from "react-router-dom";
-import styled from "styled-components";
+// import styled from "styled-components";
 
 import "./App.css";
 
-import Input from "./components/commonComponents/input/input";
-import Button from "./components/commonComponents/Button/Button";
+// import Input from "./components/commonComponents/input/input";
+// import Button from "./components/commonComponents/Button/Button";
 import Nav from "./components/commonComponents/nav/nav";
 import Footer from "./components/commonComponents/footer/footer";
-import WorkoutAddForm from "./components/workoutAddForm/workoutAddForm";
+// import WorkoutAddForm from "./components/workoutAddForm/workoutAddForm";
 import HomePage from "./pages/home/home";
 import SettingsPage from "./pages/settings/settings";
 import Backdrop from "./components/commonComponents/backdrop/backdrop";

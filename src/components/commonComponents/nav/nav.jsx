@@ -1,19 +1,19 @@
-import React, { Component, Fragment } from "react";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
+import React, { Component } from "react";
+// import { Link } from "react-router-dom";
+// import styled from "styled-components";
 import Button from "../Button/Button";
 
 import "./nav.css";
-const StyledButton = styled.button`
-  /* Adapt the colors based on primary prop */
-  background: ${(props) => (props.primary ? "palevioletred" : "#ccfff6")};
-  color: ${(props) => (props.primary ? "#ccfff6" : "palevioletred")};
-  font-size: 1em;
-  margin: 1em;
-  padding: 1em;
-  border: 2px solid palevioletred;
-  border-radius: 5px;
-`;
+// const StyledButton = styled.button`
+//   /* Adapt the colors based on primary prop */
+//   background: ${(props) => (props.primary ? "palevioletred" : "#ccfff6")};
+//   color: ${(props) => (props.primary ? "#ccfff6" : "palevioletred")};
+//   font-size: 1em;
+//   margin: 1em;
+//   padding: 1em;
+//   border: 2px solid palevioletred;
+//   border-radius: 5px;
+// `;
 
 class Nav extends Component {
   state = {
