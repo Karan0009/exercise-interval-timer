@@ -165,7 +165,6 @@
 }
 
 .button_animation:active::after {
-  transform: scaleY(3.5);
   opacity: 0.5;
 }
 

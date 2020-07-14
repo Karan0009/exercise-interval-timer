@@ -21,9 +21,9 @@ class Nav extends Component {
   };
 
   componentDidMount() {
-    this.setState({
-      showButtons: this.props.location.pathname !== "/settings",
-    });
+    // this.setState({
+    //   showButtons: this.props.location.pathname !== "/settings",
+    // });
   }
 
   render() {
@@ -36,14 +36,18 @@ class Nav extends Component {
           {this.state.showButtons && (
             <Button
               classes="nav_btn btn_add"
-              primary
+              commonStyles
               onClick={this.props.showForm}
             >
               <i className="fa fa-plus" aria-hidden="true"></i>
             </Button>
           )}
           {this.state.showButtons && (
-            <Button classes="nav_btn btn_settings" primary>
+            <Button
+              link="/settings"
+              classes="nav_btn btn_settings"
+              commonStyles
+            >
               <i className="fa fa-cog" aria-hidden="true"></i>
             </Button>
           )}

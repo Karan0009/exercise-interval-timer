@@ -23,18 +23,6 @@
   justify-self: center;
 }
 
-.btn_interact {
-  padding: 0.5rem;
-  background: #db7093;
-  color: #ccfff6;
-  border-radius: 5px;
-  outline: none;
-  border: none;
-  margin: 0 10px;
-  min-width: 100px;
-  max-width: 100px;
-}
-
 .main {
   display: grid;
   justify-items: center;

@@ -55,7 +55,15 @@
 .btn_add,
 .btn_settings {
   position: relative;
+
   z-index: 0;
+}
+
+.btn_settings {
+  text-align: center;
+}
+.btn_add:hover {
+  color: inherit;
 }
 
 .btn_add::after,
@@ -79,6 +87,5 @@
 
 .btn_add:active::after,
 .btn_settings:active::after {
-  transform: scaleY(4);
-  opacity: 0.5;
+  opacity: 0.3;
 }
