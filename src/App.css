@@ -17,6 +17,25 @@ button:hover {
   outline: none;
 }
 
+.center {
+  text-align: center;
+  margin: 0 auto;
+}
+
+.btn_home {
+  background: palevioletred;
+  color: #ccfff6;
+  font-size: 30px;
+  font-weight: bold;
+  border: 2px solid #ffffff00;
+}
+
+.btn_home:hover {
+  color: palevioletred;
+  background: white;
+  border: 4px solid palevioletred;
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;

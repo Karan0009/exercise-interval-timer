@@ -5,7 +5,7 @@ import { withRouter, Switch, Route } from "react-router-dom";
 import "./App.css";
 
 // import Input from "./components/commonComponents/input/input";
-// import Button from "./components/commonComponents/Button/Button";
+import Button from "./components/commonComponents/Button/Button";
 import Nav from "./components/commonComponents/nav/nav";
 import Footer from "./components/commonComponents/footer/footer";
 // import WorkoutAddForm from "./components/workoutAddForm/workoutAddForm";
@@ -89,7 +89,17 @@ class App extends Component {
             path="/settings"
             render={(props) => <SettingsPage {...props} />}
           />
-          <Route path="/" render={() => <div>wrong path bro</div>} />
+          <Route
+            path="/"
+            render={() => (
+              <div className="container center">
+                <h3>nothing here</h3>
+                <Button link="/" classes="btn btn_home">
+                  Home
+                </Button>
+              </div>
+            )}
+          />
         </Switch>
         <Footer />
       </div>

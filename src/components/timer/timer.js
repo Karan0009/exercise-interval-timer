@@ -8,7 +8,7 @@ let exerciseIndex = 0;
 let currentExerciseTime = 0;
 class Timer extends Component {
   state = {
-    totalTime: 20,
+    totalTime: 0,
     hasStarted: false,
     timeCompleted: false,
     elapsedTime: 0,
@@ -23,8 +23,13 @@ class Timer extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.isRestScreenOn !== this.props.isRestScreenOn) {
-      this.startTimer();
+    if (prevProps.startTimerAfterRest !== this.props.startTimerAfterRest) {
+      if (this.props.startTimerAfterRest) {
+        console.log("started");
+        this.startTimer();
+      }
+    } else if (prevProps.exercises !== this.props.exercises) {
+      this.getTotalTime();
     }
   }
 
@@ -36,6 +41,7 @@ class Timer extends Component {
         clearInterval(interval);
         if (this.props.removeScreen) {
           this.props.setShowRestScreen(false);
+          // this.props.setTimerAfterRest(true);
         }
       } else {
         let temp = this.state.totalTime;
@@ -110,7 +116,6 @@ class Timer extends Component {
     this.getTotalTime();
     this.setState({
       hasStarted: false,
-      timeCompleted: false,
       elapsedTime: 0,
       remainingTime: this.state.totalTime,
     });
@@ -120,14 +125,26 @@ class Timer extends Component {
 
   getTotalTime = () => {
     if (this.props.exercises) {
-      let time = 0;
-      for (let i of this.props.exercises) {
-        time += Number(i.exerciseDuration);
+      if (this.props.exercises.length === 0) {
+        this.setState({ totalTime: 0, timeCompleted: true });
+      } else {
+        if (this.props.exercises) {
+          let time = 0;
+          for (let i of this.props.exercises) {
+            time += Number(i.exerciseDuration);
+          }
+          this.setState({ totalTime: time, timeCompleted: false });
+        }
       }
-      this.setState({ totalTime: time });
     } else if (this.props.totalTime) {
       this.setState({ totalTime: this.props.totalTime });
     }
+  };
+
+  disableStartButton = () => {
+    if (this.state.timeCompleted) {
+      return true;
+    } else return false;
   };
 
   render() {

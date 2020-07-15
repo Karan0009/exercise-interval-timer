@@ -12,7 +12,7 @@ class HomePage extends Component {
   state = {
     exerciseName: "",
     exerciseDuration: 30,
-    showRestScreen: true,
+    showRestScreen: false,
     startTimerAfterRest: false,
   };
 
@@ -26,8 +26,13 @@ class HomePage extends Component {
   };
 
   setShowRestScreen = (value) => {
-    if (value) this.setState({ showRestScreen: value });
+    if (value)
+      this.setState({ showRestScreen: value, startTimerAfterRest: false });
     else this.setState({ showRestScreen: value, startTimerAfterRest: true });
+  };
+
+  setTimerAfterRest = (value) => {
+    this.setState({ startTimerAfterRest: value });
   };
 
   render() {
@@ -37,6 +42,7 @@ class HomePage extends Component {
           <RestScreen
             setShowRestScreen={this.setShowRestScreen}
             defaultRestTime={this.props.defaultRestTime}
+            setTimerAfterRest={this.setTimerAfterRest}
           />
         )}
 
@@ -92,6 +98,7 @@ class HomePage extends Component {
               showButtons
               showElapsedTime
               setShowRestScreen={this.setShowRestScreen}
+              startTimerAfterRest={this.state.startTimerAfterRest}
             />
 
             <Workouts

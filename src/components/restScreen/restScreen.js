@@ -23,7 +23,9 @@ const Styledp = styled.p`
 const RestScreen = (props) => {
   const skipRest = (e) => {
     props.setShowRestScreen(false);
+    props.setTimerAfterRest(true);
   };
+
   return (
     <div onMouseDown={skipRest}>
       <Backdrop />
@@ -34,6 +36,7 @@ const RestScreen = (props) => {
           auto
           removeScreen
           setShowRestScreen={props.setShowRestScreen}
+          setTimerAfterRest={props.setTimerAfterRest}
         />
       </Styledp>
       <Styledp fontSize="2em" top="70%">

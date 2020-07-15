@@ -29,7 +29,7 @@ const Input = (props) => {
     );
   } else {
     return (
-      <div>
+      <>
         {props.label && <label htmlFor={props.id}>{props.label}</label>}
         <input
           type={props.type}
@@ -49,7 +49,7 @@ const Input = (props) => {
           id={props.id}
           disabled={props.disabled}
         />
-      </div>
+      </>
     );
   }
 };

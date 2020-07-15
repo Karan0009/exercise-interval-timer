@@ -1,0 +1,105 @@
+.settings_container {
+  display: grid;
+  grid-template-columns: auto;
+  justify-items: center;
+}
+.settings_container h3 {
+  color: #005681;
+  text-transform: capitalize;
+  font-size: 35px;
+  position: relative;
+  z-index: 0;
+  margin-top: 20px;
+}
+
+.settings_container h3::after {
+  content: "";
+  position: absolute;
+  left: 6px;
+  bottom: 5px;
+  z-index: -1;
+  width: 100%;
+  height: 7px;
+  background: palevioletred;
+  transform-origin: 0% 100%;
+  transition: 0.35s;
+}
+
+.settings_container h3:hover::after {
+  transform: scaleY(1.5);
+}
+
+.setting {
+  display: grid;
+  color: #005681;
+  font-size: 20px;
+  grid-template-columns: auto;
+  grid-template-rows: auto auto;
+  justify-items: stretch;
+  margin: 10px 0;
+}
+
+.setting p {
+  margin: auto;
+  font-size: 30px;
+}
+
+.setting input {
+  border: 3px solid #005681;
+  border-radius: 5px;
+  font-size: 25px;
+  font-weight: bold;
+  color: #005681;
+}
+
+/* .setting div::after {
+  content: "<>";
+  font: 17px "Consolas", monospace;
+  color: #333;
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
+  right: 11px;
+  top: 18px;
+  padding: 0 0 2px;
+  border-bottom: 1px solid #999;
+  position: absolute;
+  pointer-events: none;
+}
+
+.setting div:active::after {
+  transform: rotate(30deg);
+}
+
+.setting div {
+  position: relative;
+  z-index: 0;
+} */
+
+.setting select {
+  width: 100%;
+  border: 3px solid #005681;
+  border-radius: 5px;
+  font-size: 25px;
+  font-weight: bold;
+  color: #005681;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.setting input::placeholder {
+  font-size: 25px;
+  color: #005681;
+}
+
+.btn_saveSettings {
+  margin-top: 20px;
+  border: none;
+  padding: 0.5rem 1.5rem;
+  background: palevioletred;
+  font-size: 20px;
+  color: #ccfff6;
+  border-radius: 5px !important;
+}
