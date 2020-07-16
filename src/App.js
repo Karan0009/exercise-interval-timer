@@ -17,24 +17,10 @@ class App extends Component {
   state = {
     appName: "Let's workout",
     defaultRestTime: 3,
+    startIndicatorSound: null,
+    endIndicatorSound: null,
     showBackdrop: false,
-    exercises: [
-      {
-        exerciseName: "one",
-        exerciseDuration: 5,
-        restDuration: 10,
-      },
-      {
-        exerciseName: "two",
-        exerciseDuration: 5,
-        restDuration: 10,
-      },
-      {
-        exerciseName: "three",
-        exerciseDuration: 5,
-        restDuration: 10,
-      },
-    ],
+    exercises: [],
     showExerciseAddForm: false,
   };
 
@@ -56,6 +42,15 @@ class App extends Component {
     const exercise = { ...data, restDuration: this.state.defaultRestTime };
     exercises.push(exercise);
     this.setState({ exercises });
+  };
+
+  saveSettingsHandler = (data) => {
+    console.log(data);
+    // this.setState({
+    //   defaultRestTime: data.defaultRestTime,
+    //   startIndicatorSound: data.startIndicatorSound,
+    //   endIndicatorSound: data.endIndicatorSound,
+    // });
   };
 
   render() {
@@ -87,7 +82,12 @@ class App extends Component {
           <Route
             exact
             path="/settings"
-            render={(props) => <SettingsPage {...props} />}
+            render={(props) => (
+              <SettingsPage
+                {...props}
+                saveSettingsHandler={this.saveSettingsHandler}
+              />
+            )}
           />
           <Route
             path="/"
