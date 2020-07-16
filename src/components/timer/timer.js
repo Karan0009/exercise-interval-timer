@@ -13,6 +13,7 @@ class Timer extends Component {
     timeCompleted: false,
     elapsedTime: 0,
     remainingTime: 0,
+    exercises: this.props.exercises,
   };
 
   componentDidMount() {
@@ -31,6 +32,12 @@ class Timer extends Component {
     } else if (prevProps.exercises !== this.props.exercises) {
       this.getTotalTime();
     }
+    //  else if (
+    //   this.state.exercises !== this.props.exercises ||
+    //   prevState.exercises !== this.state.exercises
+    // ) {
+    //   this.setState({ exercises: this.props.exercises });
+    // }
   }
 
   startAutoTimer = () => {
@@ -93,22 +100,22 @@ class Timer extends Component {
 
   syncExercisesWithTimer = () => {
     currentExerciseTime += 1;
-    console.log(currentExerciseTime);
-    if (
-      currentExerciseTime ===
-      this.props.exercises[exerciseIndex].exerciseDuration
-    ) {
-      console.log("should show rest screen");
-      currentExerciseTime = 0;
-      exerciseIndex += exerciseIndex;
-      if (exerciseIndex > this.props.exercises.length) {
-        console.log("all exercises done");
-        this.stopTimer();
-        return;
-      }
+    if (exerciseIndex + 1 > this.props.exercises.length) {
+      console.log("all exercises done");
       this.stopTimer();
-      console.log("timer stopped");
-      this.props.setShowRestScreen(true);
+      return;
+    } else {
+      if (
+        currentExerciseTime ===
+        this.props.exercises[exerciseIndex].exerciseDuration
+      ) {
+        console.log("should show rest screen");
+        currentExerciseTime = 0;
+        exerciseIndex += 1;
+        this.stopTimer();
+        console.log("timer stopped");
+        this.props.setShowRestScreen(true);
+      }
     }
   };
 
@@ -121,6 +128,8 @@ class Timer extends Component {
     });
     clearInterval(timerId);
     timerId = -1;
+    exerciseIndex = 0;
+    currentExerciseTime = 0;
   };
 
   getTotalTime = () => {

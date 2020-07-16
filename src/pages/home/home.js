@@ -56,7 +56,7 @@ class HomePage extends Component {
                   onSubmit={(e) =>
                     this.props.addExerciseHandler(e, {
                       exerciseName: this.state.exerciseName,
-                      exerciseDuration: this.state.exerciseDuration,
+                      exerciseDuration: Number(this.state.exerciseDuration),
                     })
                   }
                 >
