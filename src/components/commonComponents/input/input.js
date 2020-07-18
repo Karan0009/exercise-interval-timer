@@ -10,7 +10,7 @@ const Input = (props) => {
         <select
           className={
             props.valid
-              ? [`${props.classes}`].join(" ")
+              ? props.classes
               : [`${props.classes}`, "input-error"].join(" ")
           }
           onChange={props.onChange}
@@ -18,6 +18,7 @@ const Input = (props) => {
           id={props.id}
           onClick={props.onClick}
           onBlur={props.onBlur}
+          value={props.value}
         >
           {props.options.map((item, index) => (
             <option key={index} id={index}>

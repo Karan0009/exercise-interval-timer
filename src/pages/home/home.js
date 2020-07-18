@@ -7,13 +7,16 @@ import Workouts from "../../components/workouts/workouts";
 import Timer from "../../components/timer/timer";
 // import Countdown from "../../components/countdown/countdown";
 import RestScreen from "../../components/restScreen/restScreen";
+import { sounds } from "../settings/sounds/sounds";
 
+const audio = new Audio();
 class HomePage extends Component {
   state = {
     exerciseName: "",
     exerciseDuration: 30,
     showRestScreen: false,
     startTimerAfterRest: false,
+    soundVolume: 0.5,
   };
 
   exerciseOrRestHandler = () => {};
@@ -26,9 +29,27 @@ class HomePage extends Component {
   };
 
   setShowRestScreen = (value) => {
-    if (value)
+    if (value) {
       this.setState({ showRestScreen: value, startTimerAfterRest: false });
-    else this.setState({ showRestScreen: value, startTimerAfterRest: true });
+      const sound = sounds.find(
+        (sound) => sound.name === this.props.endIndicatorSound
+      );
+      audio.pause();
+      audio.src = sound.src;
+      audio.volume = this.state.soundVolume;
+      audio.play();
+      console.log("end audio played");
+    } else {
+      this.setState({ showRestScreen: value, startTimerAfterRest: true });
+      const sound = sounds.find(
+        (sound) => sound.name === this.props.startIndicatorSound
+      );
+      audio.pause();
+      audio.src = sound.src;
+      audio.volume = this.state.soundVolume;
+      audio.play();
+      console.log("start audio played");
+    }
   };
 
   setTimerAfterRest = (value) => {

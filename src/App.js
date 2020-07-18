@@ -11,18 +11,38 @@ import Footer from "./components/commonComponents/footer/footer";
 // import WorkoutAddForm from "./components/workoutAddForm/workoutAddForm";
 import HomePage from "./pages/home/home";
 import SettingsPage from "./pages/settings/settings";
+import { sounds } from "./pages/settings/sounds/sounds.js";
 import Backdrop from "./components/commonComponents/backdrop/backdrop";
 
 class App extends Component {
   state = {
     appName: "Let's workout",
     defaultRestTime: 3,
-    startIndicatorSound: null,
-    endIndicatorSound: null,
+    startIndicatorSound: sounds[0].name,
+    endIndicatorSound: sounds[0].name,
     showBackdrop: false,
     exercises: [],
     showExerciseAddForm: false,
   };
+
+  componentDidMount() {
+    const startIndicatorSound = localStorage.getItem("startIndicatorSound");
+    const endIndicatorSound = localStorage.getItem("endIndicatorSound");
+    const defaultRestTime = localStorage.getItem("defaultRestTime");
+    if (!startIndicatorSound || !endIndicatorSound || !defaultRestTime) {
+      this.setState({
+        defaultRestTime: 10,
+        startIndicatorSound: sounds[0].name,
+        endIndicatorSound: sounds[0].name,
+      });
+    } else {
+      this.setState({
+        defaultRestTime: defaultRestTime,
+        startIndicatorSound: startIndicatorSound,
+        endIndicatorSound: endIndicatorSound,
+      });
+    }
+  }
 
   showExerciseAddFormHandler = () => {
     const showExerciseAddForm = this.state.showExerciseAddForm;
@@ -46,11 +66,14 @@ class App extends Component {
 
   saveSettingsHandler = (data) => {
     console.log(data);
-    // this.setState({
-    //   defaultRestTime: data.defaultRestTime,
-    //   startIndicatorSound: data.startIndicatorSound,
-    //   endIndicatorSound: data.endIndicatorSound,
-    // });
+    localStorage.setItem("startIndicatorSound", data.startIndicatorSound);
+    localStorage.setItem("endIndicatorSound", data.endIndicatorSound);
+    localStorage.setItem("defaultRestTime", Number(data.defaultRestTime));
+    this.setState({
+      defaultRestTime: Number(data.defaultRestTime),
+      startIndicatorSound: data.startIndicatorSound,
+      endIndicatorSound: data.endIndicatorSound,
+    });
   };
 
   render() {
@@ -76,6 +99,8 @@ class App extends Component {
                 addExerciseHandler={this.addExerciseHandler}
                 showExerciseAddForm={this.state.showExerciseAddForm}
                 defaultRestTime={this.state.defaultRestTime}
+                startIndicatorSound={this.state.startIndicatorSound}
+                endIndicatorSound={this.state.endIndicatorSound}
               />
             )}
           />

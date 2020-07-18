@@ -2,6 +2,7 @@
   display: grid;
   grid-template-columns: auto;
   justify-items: center;
+  margin-bottom: 20px;
 }
 .settings_container h3 {
   color: #005681;
