@@ -104,3 +104,23 @@
   color: #ccfff6;
   border-radius: 5px !important;
 }
+
+.saveRoutine_setting div {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto;
+  align-items: center;
+  justify-items: stretch;
+}
+
+.btn_saveRoutine {
+  background-color: palevioletred;
+  color: #ccfff6;
+  font-weight: bold;
+  font-size: 20px;
+  margin-left: 5px;
+}
+
+.btn_saveRoutine:hover {
+  color: #ccfff6;
+}

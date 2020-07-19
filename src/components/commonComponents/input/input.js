@@ -5,7 +5,7 @@ import "./input.css";
 const Input = (props) => {
   if (props.type === "select") {
     return (
-      <div>
+      <>
         {props.label && <label htmlFor={props.id}>{props.label}</label>}
         <select
           className={
@@ -26,7 +26,7 @@ const Input = (props) => {
             </option>
           ))}
         </select>
-      </div>
+      </>
     );
   } else {
     return (

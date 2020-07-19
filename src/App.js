@@ -29,6 +29,10 @@ class App extends Component {
     const startIndicatorSound = localStorage.getItem("startIndicatorSound");
     const endIndicatorSound = localStorage.getItem("endIndicatorSound");
     const defaultRestTime = localStorage.getItem("defaultRestTime");
+    const savedRoutines = localStorage.getItem("savedRoutines");
+    if (!savedRoutines) {
+      localStorage.setItem("savedRoutines", JSON.stringify([]));
+    }
     if (!startIndicatorSound || !endIndicatorSound || !defaultRestTime) {
       this.setState({
         defaultRestTime: 10,
@@ -76,6 +80,19 @@ class App extends Component {
     });
   };
 
+  saveRoutineHandler = (name) => {
+    const savedRoutines = JSON.parse(localStorage.getItem("savedRoutines"));
+    const routine = { name: name, routine: this.state.exercises };
+    savedRoutines.push(routine);
+    localStorage.setItem("savedRoutines", JSON.stringify(savedRoutines));
+  };
+
+  loadRoutineHandler = (name) => {
+    const savedRoutines = JSON.parse(localStorage.getItem("savedRoutines"));
+    const routine = savedRoutines.find((routine) => routine.name === name);
+    this.setState({ exercises: routine.routine });
+  };
+
   render() {
     return (
       <div className="App">
@@ -110,6 +127,8 @@ class App extends Component {
             render={(props) => (
               <SettingsPage
                 {...props}
+                loadRoutineHandler={this.loadRoutineHandler}
+                saveRoutineHandler={this.saveRoutineHandler}
                 saveSettingsHandler={this.saveSettingsHandler}
               />
             )}
