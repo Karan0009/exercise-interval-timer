@@ -17,7 +17,7 @@ import Backdrop from "./components/commonComponents/backdrop/backdrop";
 class App extends Component {
   state = {
     appName: "Let's workout",
-    defaultRestTime: 3,
+    defaultRestTime: 10,
     startIndicatorSound: sounds[0].name,
     endIndicatorSound: sounds[0].name,
     showBackdrop: false,

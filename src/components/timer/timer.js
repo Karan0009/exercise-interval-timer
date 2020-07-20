@@ -31,6 +31,10 @@ class Timer extends Component {
       }
     } else if (prevProps.exercises !== this.props.exercises) {
       this.getTotalTime();
+    } else if (prevProps.totalTime !== this.props.totalTime) {
+      console.log(prevProps, "prevProps");
+      console.log(this.props, "this props");
+      this.getTotalTime();
     }
     //  else if (
     //   this.state.exercises !== this.props.exercises ||

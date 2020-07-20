@@ -21,6 +21,25 @@ class SettingsPage extends Component {
     )[0],
   };
 
+  componentDidMount() {
+    const startIndicatorSound = localStorage.getItem("startIndicatorSound");
+    const endIndicatorSound = localStorage.getItem("endIndicatorSound");
+    const defaultRestTime = localStorage.getItem("defaultRestTime");
+    if (!startIndicatorSound || !endIndicatorSound || !defaultRestTime) {
+      this.setState({
+        defaultRestTime: 10,
+        startIndicatorSound: sounds[0].name,
+        endIndicatorSound: sounds[0].name,
+      });
+    } else {
+      this.setState({
+        defaultRestTime: defaultRestTime,
+        startIndicatorSound: startIndicatorSound,
+        endIndicatorSound: endIndicatorSound,
+      });
+    }
+  }
+
   inputChangeHandler = (e) => {
     const inputId = e.target.id;
     if (inputId === "defaultRestTime") {
