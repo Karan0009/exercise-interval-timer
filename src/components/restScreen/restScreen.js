@@ -37,7 +37,7 @@ const StyledButton = styled.button`
 
 const RestScreen = (props) => {
   const [restDuration, setRestDuration] = useState(props.defaultRestTime);
-  const [restIncrement, setRestIncrement] = useState(5);
+  const [restIncrement] = useState(5);
   const skipRest = (e) => {
     props.setShowRestScreen(false);
     props.setTimerAfterRest(true);
