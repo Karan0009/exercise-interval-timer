@@ -13,6 +13,7 @@ class Footer extends Component {
             href="https://www.instagram.com/karansingh0810/"
             className="btn_social_media"
             target="_blank"
+            rel="noopener noreferrer"
           >
             <i class="fa fa-instagram" aria-hidden="true"></i>
           </a>
@@ -20,6 +21,7 @@ class Footer extends Component {
             href="https://twitter.com/Karansingh0308"
             className="btn_social_media"
             target="_blank"
+            rel="noopener noreferrer"
           >
             <i class="fa fa-envelope-o" aria-hidden="true"></i>
           </a>
