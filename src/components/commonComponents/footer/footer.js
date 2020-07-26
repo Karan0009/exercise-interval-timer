@@ -9,10 +9,16 @@ class Footer extends Component {
     return (
       <>
         <nav className="footer_custom_styles">
-          <Button link="#" classes="btn_social_media">
+          <Button
+            link="https://www.instagram.com/karansingh0810/"
+            classes="btn_social_media"
+          >
             <i class="fa fa-instagram" aria-hidden="true"></i>
           </Button>
-          <Button link="#" classes="btn_social_media">
+          <Button
+            link="https://twitter.com/Karansingh0308"
+            classes="btn_social_media"
+          >
             <i class="fa fa-envelope-o" aria-hidden="true"></i>
           </Button>
         </nav>
